@@ -1,3 +1,4 @@
+# coding:utf-8
 from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.mail import Mail
@@ -35,5 +36,9 @@ def create_app(config_name):
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    # url_prefix是可选参数，注册后蓝本定义的所有路由都会加上指定前缀，既这个例子中的/auth
+
+    from .api_1_0 import api as api_1_0_blueprint
+    app.register_blueprint(api_1_blueprint, url_prefix='/api/v1.0')
 
     return app
